@@ -4,7 +4,7 @@ async function embedding(input: string): Promise<number[]> {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer VRE6ZRYRZXSNIQVH58ZBHDM7BATGBCF9DVE0LL1V`,
+        Authorization: `Bearer ${process.env.GITEE_AI_TOKEN}`,
       },
       body: JSON.stringify({
         input: [

@@ -1,6 +1,6 @@
 const generate = async (prompt: string) => {
   const API_URL = "https://ai.gitee.com/v1/chat/completions";
-  const API_TOKEN = "VRE6ZRYRZXSNIQVH58ZBHDM7BATGBCF9DVE0LL1V";
+  const API_TOKEN = process.env.GITEE_AI_TOKEN;
   const headers = {
     "X-Failover-Enabled": "true",
     Authorization: `Bearer ${API_TOKEN}`,

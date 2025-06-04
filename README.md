@@ -1,36 +1,25 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 简化知识库
 
-## Getting Started
+本项目旨在通过自动化方式简化知识库的构建与问答流程。系统支持从在线知识库地址自动爬取内容，进行向量化处理，并结合大模型实现高效的智能问答。
 
-First, run the development server:
+## 使用技术
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- 爬虫：自动抓取在线知识库内容
+- 文本向量化：由 gitee ai 提供的 Embedding 服务
+- 向量数据库：better-sqlite3
+- 大语言模型：Qwen3-32B（由 gitee ai 提供）
+- Prompt 组装与上下文增强
+
+## 工作流程
+
+1. 通过在线知识库地址爬取内容
+2. 对内容进行向量化存储
+3. 对用户提问内容转换为向量
+4. 在向量数据库中进行相关内容检索
+5. 将检索结果与用户问题组装成 Prompt
+
+```
+`以下是相关的背景信息：\n"${chunkTexts}"\n\n用户语言为：${lang}\n请根据上面的信息回答用户的问题:\n${query}`
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+6. 调用 Qwen3-32B 大模型生成最终回答
